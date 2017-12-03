@@ -18,7 +18,7 @@ realname:
 username:
 
 # Bot Prefix. Default is !
-prefix: 
+prefix:
 
 ### SERVER INFORMATION ###
 
@@ -26,9 +26,9 @@ prefix:
 server:
 # Server Port (default: 6667)
 port:
-# Put the Channels you want to join, Comma separated. (ex. #chan1,#chan2)
+# Put the channel you want IdleRPG to play in.
 # Do not modify these quotation marks.
-channels:     ""
+channel:     ""
 ## Connect using SSL? (Set to true to enable)
 ssl: false
 ## Have a sevrer password? Put it below! Otherwise, leave it blank!

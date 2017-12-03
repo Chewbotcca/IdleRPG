@@ -59,11 +59,10 @@ class Setup
       puts 'Enter the server port, if you don\'t know, use 6667 - REQUIRED '
       @config['port'] = gets.chomp
 
-      puts 'Connect using SSL? (true/false)'
+      puts 'Connect using SSL? (true/false) - Leave blank for false.'
       @config['ssl'] = gets.chomp
 
-      puts 'What channels should the bot join on startup? this must be comma seperated with #s before the names. - Optional'
-      puts 'Hint! You can always invite the bot to your channel and it will join!'
+      puts 'What channel should IdleRPG operate in? - REQUIRED'
       @config['channels'] = gets.chomp
 
       puts "What should be the bot's realname? This is shown on a whois. - Optional"
