@@ -75,7 +75,7 @@ bot = Cinch::Bot.new do
     # Bot Settings, Taken from pre-config
     c.nick = botnick
     c.server = botserver
-    c.channels = [CONFIG['channels'][0..0]]
+    c.channels = [CONFIG['channels']]
     c.port = botport
     c.user = botuser
     c.realname = botrealname
