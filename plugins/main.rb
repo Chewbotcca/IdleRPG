@@ -6,9 +6,9 @@ class Main
   def setup(m)
     m.reply 'Setting up the channel for IdleRPG'
     begin
-      m.channel.mode "+v #{CONFIG['nickname']}"
+      m.channel.voice CONFIG['nickname']
     rescue
-      m.reply 'I do not have permission voice users! Aborting!'
+      m.reply 'I do not have permission to voice users! Aborting!'
       return
     end
     channel = m.channel.to_s[1..m.channel.to_s.length]
@@ -17,12 +17,13 @@ class Main
       File.new(filename, 'w+')
       exconfig = YAML.load_file('data/channels/channel.example.yaml')
       File.open(filename, 'w') { |f| f.write exconfig.to_yaml }
+      Dir.mkdir("data/channels/#{channel}")
     end
     data = YAML.load_file(filename)
     data['name'] = channel
     data['ownerhost'] = m.user.host
     data['users'] = 0
     File.open(filename, 'w') { |f| f.write data.to_yaml }
-    m.reply "Channel ready! Run `/msg #{CONFIG['nickname']} register [username] [password] [classname]`"
+    m.reply "Channel ready! Run `/msg #{CONFIG['nickname']} register #{m.channel.name} [username] [password] [classname]`"
   end
 end
