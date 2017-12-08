@@ -11,7 +11,7 @@ class Main
       m.reply 'I do not have permission to voice users! Aborting!'
       return
     end
-    channel = m.channel.to_s[1..m.channel.to_s.length]
+    channel = m.channel.to_s[1..m.channel.to_s.length].downcase
     filename = "data/channels/#{channel}.yaml"
     unless File.exist?(filename)
       File.new(filename, 'w+')
