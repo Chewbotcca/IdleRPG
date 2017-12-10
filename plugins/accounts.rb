@@ -27,6 +27,8 @@ class Accounts
     userdata['name'] = user
     userdata['pass'] = Digest::SHA256.hexdigest("#{pass}#{userdata['salt']}")
     userdata['class'] = clazz
+    data['count'] += 1
+    File.open(filename, 'w') { |f| f.write data.to_yaml }
     File.open(userdataname, 'w') { |f| f.write userdata.to_yaml }
     m.reply "User #{user} set up in channel #{chan}, with the class name #{clazz}. Your passwords are not stored in plain text and are hashed with salt."
   end
