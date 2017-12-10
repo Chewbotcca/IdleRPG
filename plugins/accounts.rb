@@ -32,4 +32,29 @@ class Accounts
     File.open(userdataname, 'w') { |f| f.write userdata.to_yaml }
     m.reply "User #{user} set up in channel #{chan}, with the class name #{clazz}. Your passwords are not stored in plain text and are hashed with salt."
   end
+
+  def login(m, chan, user, pass)
+    channel = chan.to_s[1..chan.to_s.length].downcase
+    user.downcase!
+    filename = "data/channels/#{channel}.yaml"
+    unless File.exist?(filename)
+      m.reply 'That channel isn\'t set up, yet!'
+      return
+    end
+    userdataname = "data/channels/#{channel}/#{user}.yaml"
+    unless File.exist?(userdataname)
+      m.reply 'That user doesn\'t exist!! Please register with `register #chan user pass classname`'
+      return
+    end
+    userdata = false
+    userdata = YAML.load_file(userdataname) while userdata == false
+    salt = userdata['salt']
+    userinput = Digest::SHA256.hexdigest("#{pass}#{salt}")
+    hash = userdata['pass']
+    if hash == userinput
+      m.reply "You are now logged in as #{user}! Welcome back."
+    else
+      m.reply 'Invalid username or password! Please try again!'
+    end
+  end
 end
